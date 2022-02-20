@@ -34,6 +34,12 @@ function textBox(text, cellOptions) {
   const cellWidth = cellOptions.cellWidth || 200;
   const cellHeight = cellOptions.cellHeight || 200;
 
+  // get doc.y
+  // check doc.y + nextboxtotalheight < doc.page.maxY()
+  // if true run below code
+  // else run doc.addPage()
+  // after run addPage insert new textbox
+
   if (borderCollapse) {
     // totalheight = 2*borderWidth + boxHeight
     // doc.rect(5, 5, 200, 200).lineWidth(10).stroke();
@@ -50,7 +56,10 @@ function textBox(text, cellOptions) {
 
     const prevX = doc.x;
     const prevY = doc.y;
-    doc.text(text, 10, 10);
+    // Position line x line feed after borderWidth and cellPadding
+    doc.x = doc.x + borderWidth + cellPadding;
+    doc.y = doc.y + borderWidth + cellPadding;
+    doc.text(text, doc.x, doc.y);
     doc.x = prevX;
     doc.y = prevY;
 
@@ -76,7 +85,10 @@ function textBox(text, cellOptions) {
   }
 }
 
-textBox("Hello", { borderCollapse: true });
+textBox(
+  "Berdasarkan data menerusi laman web COVIDNOW, sejumlah 13,924,411 atau 59.2 peratus populasi dewasa di dalam negara pula menerima dos penggalak COVID-19 dan seramai 22,943,785 atau 97.5 peratus lengkap vaksinasi, manakala 23,220,757 atau 98.7 peratus menerima sekurang-kurangnya satu dos.",
+  { borderCollapse: true }
+);
 textBox("Hello", { borderCollapse: true });
 textBox("Hello", { borderCollapse: true });
 textBox("Hello", { borderCollapse: true });
