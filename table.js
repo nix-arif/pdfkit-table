@@ -1,3 +1,4 @@
+const doc = require("pdfkit");
 const PDFDocumentWithCells = require("./cell");
 
 class PDFDocumentWithTables extends PDFDocumentWithCells {}
@@ -8,3 +9,10 @@ const cell = new PDFDocumentWithCells({
 });
 
 cell.insertTextCell("Text");
+
+const configCell = {};
+
+doc.table(table, {
+  header: [],
+  rows: [],
+});
